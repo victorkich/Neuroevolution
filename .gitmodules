@@ -1,0 +1,3 @@
+[submodule "ManyTor"]
+	path = ManyTor
+	url = https://github.com/victorkich/ManyTor
