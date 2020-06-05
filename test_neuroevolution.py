@@ -12,9 +12,9 @@ class Net(nn.Module):
 		self.mu = nn.Sequential(
 			nn.Linear(obs_size, hid_size),
 			nn.Tanh(),
-			nn.Linear(hid_size, hid_size),
+			nn.Linear(hid_size, 30),
 			nn.Tanh(),
-			nn.Linear(hid_size, act_size),
+			nn.Linear(30, act_size),
 			nn.Tanh(),
 		)
 
@@ -27,7 +27,7 @@ max_steps = 50
 obj_number = 10
 
 model = Net(obs_size=obj_number*3, act_size=4)
-model.load_state_dict(torch.load('net.pt'))
+model.load_state_dict(torch.load('net_complex_multi.pt'))
 model.eval()
 
 env = tor.Environment(obj_number)
@@ -40,10 +40,6 @@ timer = time.time()
 
 for i in range(1, epochs):
 
-	model.load_state_dict(torch.load('net.pt'))
-	model.eval()
-	time_epoch = time.time()
-
 	for p in tqdm(range(max_steps)):
 		obs_v = torch.FloatTensor([obs])
 		action_v = model.forward(obs_v)
@@ -55,7 +51,6 @@ for i in range(1, epochs):
 		time.sleep(0.1)
 
 	epoch += 1
-	epochs_time.append([i, time.time()-time_epoch])
 	print('Total Reward: ', env.total_reward)
 	print('Epoch: ', epoch)
 	env.reset()
