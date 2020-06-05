@@ -1,4 +1,4 @@
-import manytor as tor
+import ManyTor.manytor as tor
 from tqdm import tqdm
 import torch.nn as nn
 import torch
@@ -12,9 +12,9 @@ class Net(nn.Module):
 		self.mu = nn.Sequential(
 			nn.Linear(obs_size, hid_size),
 			nn.Tanh(),
-			nn.Linear(hid_size, 30),
+			nn.Linear(hid_size, hid_size),
 			nn.Tanh(),
-			nn.Linear(30, act_size),
+			nn.Linear(hid_size, act_size),
 			nn.Tanh(),
 		)
 

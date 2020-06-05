@@ -5,7 +5,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.multiprocessing as mp
-import manytor as tor
+import ManyTor.manytor as tor
 from tqdm import tqdm
 import pandas as pd
 
@@ -22,14 +22,14 @@ MAX_STEPS = 100
 
 
 class Net(nn.Module):
-    def __init__(self, obs_size, act_size, hid_size=60):
+    def __init__(self, obs_size, act_size, hid_size=64):
         super(Net, self).__init__()
         self.mu = nn.Sequential(
             nn.Linear(obs_size, hid_size),
             nn.Tanh(),
-            nn.Linear(hid_size, 30),
+            nn.Linear(hid_size, hid_size),
             nn.Tanh(),
-            nn.Linear(30, act_size),
+            nn.Linear(hid_size, act_size),
             nn.Tanh(),
         )
 
