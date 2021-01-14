@@ -47,4 +47,3 @@ pip3 install -r requirements.txt
   <i>If you liked this repository, please don't forget to starred it!</i>
   <img src="https://img.shields.io/github/stars/victorkich/Neuroevolution?style=social"/>
 </p>
-```
